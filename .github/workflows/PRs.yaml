@@ -34,11 +34,11 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=omri-ratson_todo-demo-app
       # Triggering SonarQube analysis as results of it are required by Quality Gate check.
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      #- name: SonarQube Scan
+      #  uses: sonarsource/sonarqube-scan-action@master
+      #  env:
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       # Check the Quality Gate status.
       - name: SonarQube Quality Gate check

@@ -32,7 +32,12 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: mvn -B clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=omri-ratson_todo-demo-app
+        run: mvn -B clean package
+      - name: SonarQube Scan
+        uses: kitabisa/sonarqube-action@v1.2.0
+        with:
+          host: ${{ secrets.SONARQUBE_HOST }}
+          login: ${{ secrets.SONARQUBE_TOKEN }}
       # Triggering SonarQube analysis as results of it are required by Quality Gate check.
       #- name: SonarQube Scan
       #  uses: sonarsource/sonarqube-scan-action@master

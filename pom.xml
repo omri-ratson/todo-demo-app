@@ -21,9 +21,6 @@
         <quarkus-plugin.version>${quarkus.platform.version}</quarkus-plugin.version>
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
         <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
-
-        <sonar.organization>omri-ratson</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     
     <dependencyManagement>

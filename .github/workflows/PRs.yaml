@@ -37,7 +37,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 #          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 #        run: mvn -B verify #org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          run: mvn -B verify sonar:sonar -Dsonar.projectKey=omri-ratson_todo-demo-app -Dsonar.organization=omri-ratson -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=omri-ratson_todo-demo-app -Dsonar.organization=omri-ratson -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 #      # Triggering SonarQube analysis as results of it are required by Quality Gate check.
 #      - name: SonarQube Scan
 #        uses: sonarsource/sonarqube-scan-action@master

@@ -20,4 +20,8 @@ import org.eclipse.microprofile.openapi.annotations.info.License;
 )
 public class TodoApplication extends Application {
 
+    private String CodeSmelly(){
+        return "WTF?";
+    }
+
 }

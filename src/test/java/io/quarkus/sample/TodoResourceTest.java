@@ -76,6 +76,7 @@ class TodoResourceTest {
                 .statusCode(expectedStatus);
     }
 
+    @SuppressWarnings("squid:S1144")
     private static Stream<Arguments> todoItemsToDelete() {
         return Stream.of(
                 Arguments.of(5, 204),

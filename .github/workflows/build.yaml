@@ -57,6 +57,7 @@ jobs:
 #          name: sonar-report
 #          path: target/jacoco-data/**/*
       - name: Set up Sonar Quality Gate
+        if: always()
         uses: dieuhd/sonar-quality-gate@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}

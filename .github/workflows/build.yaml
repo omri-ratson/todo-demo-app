@@ -27,7 +27,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: mvn clean verify sonar:sonar -Dsonar.login=${{ secrets.NICE_SONAR_TOKEN }}
+        run: mvn clean verify sonar:sonar "-Dsonar.projectKey=omriGitHubDemo" "-Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}" "-Dsonar.login=${{ secrets.NICE_SONAR_TOKEN }}" -DskipTests
+#        run: mvn clean verify sonar:sonar -Dsonar.login=${{ secrets.NICE_SONAR_TOKEN }}
       # Triggering SonarQube analysis as results of it are required by Quality Gate check.
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master

@@ -47,11 +47,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.NICE_SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} #OPTIONAL
-      - uses: actions/upload-artifact@v3
+      - name: upload sonar report
+        if: always()
+        uses: actions/upload-artifact@v3
         with:
           name: sonar-report.txt
           path: .scannerwork/report-task.txt
-
       # Optionally you can use the output from the Quality Gate in another step.
       # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
       - name: "Example show SonarQube Quality Gate Status value"

@@ -50,9 +50,22 @@ jobs:
       - name: "show SonarQube Quality Gate Status value"
         if: always()
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-      - name: upload sonar report
-        if: always()
-        uses: actions/upload-artifact@v3
+#      - name: upload sonar report
+#        if: always()
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: sonar-report
+#          path: target/jacoco-data/**/*
+      - name: Set up Sonar Quality Gate
+        uses: dieuhd/sonar-quality-gate@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GIT_URL: "https://github.com/omri-ratson/todo-demo-app"
+          GIT_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          SONAR_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.NICE_SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: omriGitHubDemo
         with:
-          name: sonar-report
-          path: target/jacoco-data/**/*
+          login: ${{ secrets.NICE_SONAR_TOKEN }}
+          url: ${{ secrets.SONAR_HOST_URL }}
+          projectKey: omriGitHubDemo

@@ -60,9 +60,9 @@ jobs:
         if: always()
         uses: dieuhd/sonar-quality-gate@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEW_GITHUB_TOKEN }}
           GIT_URL: "https://github.com/omri-ratson/todo-demo-app"
-          GIT_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GIT_TOKEN: ${{ secrets.NEW_GITHUB_TOKEN }}
           SONAR_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.NICE_SONAR_TOKEN }}
           SONAR_PROJECT_KEY: omriGitHubDemo

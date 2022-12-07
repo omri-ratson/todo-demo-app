@@ -37,9 +37,9 @@ public class TodoGraphQLEndpoint {
     @Mutation
     @Description("Update an exiting todo")
     public Todo update(@Valid Todo todo, Long id) {
-        var  entity = (Todo) findById(id);
+        Todo entity = findById(id);
         entity.id = id;
-        entity.COMPLETED = todo.COMPLETED;
+        entity.completed = todo.completed;
         entity.order = todo.order;
         entity.title = todo.title;
         entity.url = todo.url;

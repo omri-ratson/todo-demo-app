@@ -9,19 +9,22 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.listAll;
+
 @GraphQLApi
 public class TodoGraphQLEndpoint {
 
     @Query
     @Description("Get all the todos")
     public List<Todo> getAllTodos() {
-        return Todo.listAll(Sort.by("order"));
+        return listAll(Sort.by("order"));
     }
 
     @Query
     @Description("Get a specific todo by id")
     public Todo getTodo(Long id) {
-        return Todo.findById(id);
+        return findById(id);
     }
 
     @Mutation
@@ -34,9 +37,9 @@ public class TodoGraphQLEndpoint {
     @Mutation
     @Description("Update an exiting todo")
     public Todo update(@Valid Todo todo, Long id) {
-        Todo entity = Todo.findById(id);
+        var  entity = (Todo) findById(id);
         entity.id = id;
-        entity.completed = todo.completed;
+        entity.COMPLETED = todo.COMPLETED;
         entity.order = todo.order;
         entity.title = todo.title;
         entity.url = todo.url;
@@ -54,7 +57,7 @@ public class TodoGraphQLEndpoint {
     @Mutation
     @Description("Delete a specific todo")
     public Todo deleteTodo(Long id) {
-        Todo entity = Todo.findById(id);
+        Todo entity = findById(id);
         if (entity == null) {
             return null;
         }

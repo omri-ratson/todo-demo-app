@@ -12,11 +12,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Entity
 public class Todo extends PanacheEntity {
 
+    private static final String COMPLETED_STR = "completed";
+
     @NotBlank
     @Column(unique = true)
     public String title;
 
-    public boolean completed;
+    public static final boolean COMPLETED = false;
 
     @Column(name = "ordering")
     public int order;
@@ -25,15 +27,15 @@ public class Todo extends PanacheEntity {
     public String url;
 
     public static List<Todo> findNotCompleted() {
-        return list("completed", false);
+        return list(COMPLETED_STR, false);
     }
 
     public static List<Todo> findCompleted() {
-        return list("completed", true);
+        return list(COMPLETED_STR, true);
     }
 
     public static long deleteCompleted() {
-        return delete("completed", true);
+        return delete(COMPLETED_STR, true);
     }
 
 }

@@ -5,12 +5,14 @@ import io.quarkus.panache.common.Sort;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.util.List;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.listAll;
 
 @Path("/api")
 @Tag(name = "Todo Resource", description = "All Todo Operations")
@@ -25,14 +27,14 @@ public class TodoResource {
     @GET
     @Operation(description = "Get all the todos")
     public List<Todo> getAll() {
-        return Todo.listAll(Sort.by("order"));
+        return listAll(Sort.by("order"));
     }
 
     @GET
     @Path("/{id}")
     @Operation(description = "Get a specific todo by id")
     public Todo getOne(@PathParam("id") Long id) {
-        Todo entity = Todo.findById(id);
+        Todo entity = findById(id);
         if (entity == null) {
             throw new WebApplicationException("Todo with id of " + id + " does not exist.", Status.NOT_FOUND);
         }
@@ -52,9 +54,9 @@ public class TodoResource {
     @Transactional
     @Operation(description = "Update an exiting todo")
     public Response update(@Valid Todo todo, @PathParam("id") Long id) {
-        Todo entity = Todo.findById(id);
+        Todo entity = findById(id);
         entity.id = id;
-        entity.completed = todo.completed;
+        entity.COMPLETED = todo.COMPLETED;
         entity.order = todo.order;
         entity.title = todo.title;
         entity.url = todo.url;
@@ -74,7 +76,7 @@ public class TodoResource {
     @Path("/{id}")
     @Operation(description = "Delete a specific todo")
     public Response deleteOne(@PathParam("id") Long id) {
-        Todo entity = Todo.findById(id);
+        Todo entity = findById(id);
         if (entity == null) {
             throw new WebApplicationException("Todo with id of " + id + " does not exist.", Status.NOT_FOUND);
         }

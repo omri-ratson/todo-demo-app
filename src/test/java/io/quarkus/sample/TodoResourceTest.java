@@ -17,10 +17,10 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TodoResourceTest {
+class TodoResourceTest {
 
     @Test @Order(1)
-    public void testGetAll() {
+    void testGetAll() {
         given()
             .accept(ContentType.JSON)
         .when()
@@ -31,7 +31,7 @@ public class TodoResourceTest {
     }
     
     @Test @Order(2)
-    public void testGet() {
+    void testGet() {
         given()
             .accept(ContentType.JSON)
         .when()
@@ -42,7 +42,7 @@ public class TodoResourceTest {
     }
 
     @Test @Order(3)
-    public void testCreateNew() {
+    void testCreateNew() {
         given()
             .contentType(ContentType.JSON)
         .when()
@@ -54,7 +54,7 @@ public class TodoResourceTest {
     }
 
     @Test @Order(4)
-    public void testUpdate() {
+    void testUpdate() {
         given()
             .contentType(ContentType.JSON)
         .when()
@@ -67,7 +67,7 @@ public class TodoResourceTest {
 
     @ParameterizedTest @Order(5)
     @MethodSource("todoItemsToDelete")
-    public void testDelete(int id, int expectedStatus) {
+    void testDelete(int id, int expectedStatus) {
         given()
                 .pathParam("id", id)
         .when()
@@ -76,6 +76,7 @@ public class TodoResourceTest {
                 .statusCode(expectedStatus);
     }
 
+    @SuppressWarnings("squid:S1144")
     private static Stream<Arguments> todoItemsToDelete() {
         return Stream.of(
                 Arguments.of(5, 204),
